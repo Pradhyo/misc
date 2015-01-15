@@ -16,5 +16,19 @@ def isafter(year1, month1, day1, year2, month2, day2):
         return False
     return True
 
+def daysBetweenDates(year1, month1, day1, year2, month2, day2):
+    """Returns the number of days between year1/month1/day1
+       and year2/month2/day2. Assumes inputs are valid dates
+       in Gregorian calendar, and the first date is not after
+       the second."""
 
-print isafter(2012,12,30,2012,1,1)
+    days = 0
+    while isafter(year1, month1, day1, year2, month2, day2):
+        days+=1
+        year1,month1,day1 = nextDay(year1, month1, day1)
+        
+    return days
+
+
+
+print daysBetweenDates(1992,6,9,2015,1,15)
