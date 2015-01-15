@@ -1,14 +1,32 @@
 # Program to find difference between two dates
 
 def nextDay(year, month, day):
-    """Simple version: assume every month has 30 days"""
-    if day < 30:
-        return year, month, day + 1
-    else:
-        if month == 12:
-            return year + 1, 1, 1
-        else:
-            return year, month + 1, 1
+    """Returns date of next day"""
+    day += 1
+    if day == daysinmonth(month,year)+1:
+        day = 1
+        month += 1
+    if month == 13:
+        month = 1
+        year += 1
+    
+    return year, month, day
+
+def daysinmonth(month,year):
+	"""Returns number of days in month"""
+	dayspermonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	if isleap(year):
+		dayspermonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	return dayspermonth[month-1]
+
+def isleap(year):
+	"""Returns true if leap year"""
+	if year%400==0:
+		return True
+	elif year%100==0:
+		return False
+	else:
+		return year % 4==0
 
 def isafter(year1, month1, day1, year2, month2, day2):
     """Returns True if date2 is after date1"""
@@ -21,7 +39,7 @@ def daysBetweenDates(year1, month1, day1, year2, month2, day2):
        and year2/month2/day2. Assumes inputs are valid dates
        in Gregorian calendar, and the first date is not after
        the second."""
-
+    #assert isafter(year1, month1, day1, year2, month2, day2)       
     days = 0
     while isafter(year1, month1, day1, year2, month2, day2):
         days+=1
@@ -32,3 +50,6 @@ def daysBetweenDates(year1, month1, day1, year2, month2, day2):
 
 
 print daysBetweenDates(1992,6,9,2015,1,15)
+print daysBetweenDates(1915,1,15,2015,1,15)
+print daysBetweenDates(1992,1,1,1991,12,20)
+print daysBetweenDates(1900, 1, 1, 1999, 12, 31)
