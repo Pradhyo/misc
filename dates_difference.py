@@ -10,4 +10,11 @@ def nextDay(year, month, day):
         else:
             return year, month + 1, 1
 
-print nextDay(2012,1,30)
+def isafter(year1, month1, day1, year2, month2, day2):
+    """Returns True if date2 is after date1"""
+    if (year2-year1)*1000+(month2-month1)*50+(day2-day1)<=0:
+        return False
+    return True
+
+
+print isafter(2012,12,30,2012,1,1)
