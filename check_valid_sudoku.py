@@ -1,11 +1,15 @@
 # Python program to check if given sudoku is valid
 
-def check_sudoku(sudoku):
+def valid_rows(sudoku):
+	"""Check if rows of given sudoku are valid"""
 	for row in sudoku:
 		if set(row) != set(range(1,len(sudoku)+1)):
 			return False
-	else:
-		return True
+	return True
+
+def check_sudoku(sudoku):
+	"""Check if given sudoku is valid"""
+	return valid_rows(sudoku) and valid_rows(zip(*sudoku))
 
 
 correct = [[1,2,3],
