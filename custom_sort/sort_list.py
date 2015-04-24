@@ -1,9 +1,8 @@
-import csv
+import string
+
+delchars = ''.join(c for c in map(chr, range(256)) if not c.isalnum() and c != ' ')
 
 with open('input4.txt', 'rb') as input_file:
-	list_items = csv.reader(input_file, delimiter = ' ')
+	list_items = input_file.read().translate(None, delchars).split(' ')
 	
-	with open('results.txt', 'wb') as output_file:
-		sorted_list = csv.writer(output_file, delimiter = ' ')
-		for each in list_items:
-			sorted_list.writerow(each)
+print list_items
